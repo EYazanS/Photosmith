@@ -44,11 +44,9 @@ params parse_params(int argc, char **argv)
 	return args;
 }
 
-int is_file_valid(char *file_path)
+int is_file_valid(char *accepted_extentions[], int accepted_extentions_count, char *file_path)
 {
 	int result = 0;
-
-	char *accepted_extentions[] = {"png", "jpeg", "jpg"};
 
 	int extention_length = 0;
 
@@ -60,17 +58,49 @@ int is_file_valid(char *file_path)
 	{
 		if (file_path[path_length] == '.')
 		{
-			ext_dot_index = path_length;
+			ext_dot_index = path_length + 1;
 		}
 
 		path_length++;
 	}
 
-	for (size_t i = 0; i < ARRAY_SIZE(accepted_extentions); i++)
+	for (size_t i = 0; i < accepted_extentions_count; i++)
 	{
 		if (strcmp(accepted_extentions[i], file_path + ext_dot_index) == 0)
 		{
 			result = 1;
+			break;
+		}
+	}
+
+	return result;
+}
+
+file_type get_file_type(char *accepted_extentions[], int accepted_extentions_count, char *file_path)
+{
+	file_type result;
+
+	int extention_length = 0;
+
+	int path_length = 0;
+
+	int ext_dot_index = 0;
+
+	while (file_path[path_length])
+	{
+		if (file_path[path_length] == '.')
+		{
+			ext_dot_index = path_length + 1;
+		}
+
+		path_length++;
+	}
+
+	for (size_t i = 0; i < accepted_extentions_count; i++)
+	{
+		if (strcmp(accepted_extentions[i], file_path + ext_dot_index) == 0)
+		{
+			result = (file_type)i;
 			break;
 		}
 	}
@@ -103,14 +133,18 @@ int main(int argc, char **argv)
 		return -1;
 	}
 
-	printf_s("W: %i, H: %i, path: %s", args.width, args.height, args.path);
+	char *accepted_extentions[] = {"png", "jpeg", "jpg"};
 
-	if (!is_file_valid(args.path))
+	if (!is_file_valid(accepted_extentions, ARRAY_SIZE(accepted_extentions), args.path))
 	{
 		fprintf(stderr, "Please enter supported file ('png', 'jpeg', 'jpg')");
 
 		return -1;
 	}
+
+	args.type = get_file_type(accepted_extentions, ARRAY_SIZE(accepted_extentions), args.path);
+
+	printf_s("W: %i, H: %i, path: %s, type: %i", args.width, args.height, args.path, args.type);
 
 	return 0;
 }

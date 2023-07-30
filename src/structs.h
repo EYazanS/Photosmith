@@ -3,9 +3,9 @@
 
 enum file_type
 {
-	jpg,
-	jpeg,
-	png
+	png = 0,
+	jpeg = 1,
+	jpg = 2,
 };
 
 struct params
