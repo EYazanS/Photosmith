@@ -1,0 +1,48 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"C_Cpp.default.defines": [
+			
+		],
+		"editor.tabSize": 4,
+		"editor.insertSpaces": false,
+		"git.autofetch": true,
+		"editor.detectIndentation": false,
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "(Windows) Attach",
+				"type": "cppvsdbg",
+				"request": "launch",
+				"cwd": "${workspaceRoot}/build",
+				"program": "${cwd}/build/main.exe",
+			},
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"type": "shell",
+				"label": "Build Windows",
+				"command": "${workspaceFolder}/build.bat",
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				},
+				"group": {
+					"kind": "build",
+				},
+				"detail": "Build on Windows."
+			},
+		]
+	}
+}
