@@ -18,9 +18,9 @@ struct params
 	char *path;
 };
 
-struct image
+struct image_data
 {
-	data_t data;
+	u8 *data;
 	u32 height;
 	u32 width;
 };
