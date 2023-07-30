@@ -8,6 +8,9 @@
 #define access _access
 #endif
 
+#include <jpeglib.h>
+
+#include "typesdef.h"
 #include "structs.h"
 #include "functions.h"
 
@@ -104,6 +107,15 @@ file_type get_file_type(char *accepted_extentions[], int accepted_extentions_cou
 			break;
 		}
 	}
+
+	return result;
+}
+
+image read_file_data(params args, char *file_path)
+{
+	image result;
+
+
 
 	return result;
 }
