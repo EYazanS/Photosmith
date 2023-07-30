@@ -6,7 +6,7 @@
 	],
 	"settings": {
 		"C_Cpp.default.defines": [
-			
+			"WIN32"
 		],
 		"editor.tabSize": 4,
 		"editor.insertSpaces": false,
